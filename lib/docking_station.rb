@@ -16,10 +16,6 @@ class DockingStation
     end
   end
 
-  def empty?
-    @storage.empty?
-  end
-
   def dock_bikes(arg)
     if full?
       fail "Dock at maximum capacity"
@@ -28,12 +24,18 @@ class DockingStation
     end
   end
 
+  def look_at_bike
+    @storage
+  end
+
+  private
+
   def full?
     @storage.size >= 20
   end
 
-  def look_at_bike
-    @storage
+  def empty?
+    @storage.empty?
   end
 
 end
