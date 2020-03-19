@@ -8,7 +8,6 @@ class DockingStation
   end
 
   def release_bike
-    # if the storage has no bikes then dont release bike
     if @storage.empty?
       fail "no bike available"
     else

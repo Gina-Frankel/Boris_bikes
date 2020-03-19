@@ -1,29 +1,36 @@
 require 'docking_station'
 
 describe DockingStation do
-docking_station = DockingStation.new
-let(:daisy){Bike.new} # indepedent bike
+  subject(:docking_station) { described_class.new }
+  let(:daisy){Bike.new}
 
-  it { is_expected.to respond_to :release_bike }
-  #it - refering to describe DockingStation do
+  describe "release_bike" do
+    let(:releasing_station) { DockingStation.new }
 
-  it {expect(docking_station).to respond_to(:dock_bikes).with(1)}
+    it "releases a bike" do
+      expect(releasing_station).to respond_to :release_bike 
+    end
 
-  it do
-    #subject(:daisy) {docking_station.release_bike}
-    expect(daisy).to respond_to :working?
+    it "raises error if asked to release bike with no bike" do
+      expect { docking_station.release_bike}.to raise_error "no bike available"
+    end
   end
 
-  it "docking station releases bike with no bike" do
-    #subject(:daisy) { docking_station.release_bike }
-    expect { docking_station.release_bike}.to raise_error "no bike availble"#raise_error
+  it "responds to dock bike with 1 argument" do
+    expect(docking_station).to respond_to(:dock_bikes).with(1).argument
   end
-     # look at bike
 
-  it do
-  #subject(:daisy) { docking_station.dock_bikes}
-  docking_station.dock_bikes(daisy)
-  expect (docking_station.look_at_bike).to include(daisy)
+  describe Bike do
+    subject(:daisy){Bike.new}
+    it "responds to working?" do
+      expect(daisy).to respond_to :working?
+    end
+  end
+
+
+  it "docks a bike" do
+    docking_station.dock_bikes(daisy)
+    expect(docking_station.look_at_bike).to include(daisy)
   end
 
 end
