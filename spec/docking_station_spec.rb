@@ -32,6 +32,16 @@ describe DockingStation do
     end
   end
   
+  describe "#full" do
+    it "returns true if dock is full" do
+      20.times { docking_station.dock_bikes(Bike.new) }
+      expect(docking_station).to be_full
+      expect(docking_station.full?).to eq true 
+    end
+    it "returns false if the dock is not full" do
+      expect(docking_station).to_not be_full
+    end
+  end
   
   describe Bike do
     subject(:daisy){Bike.new}
@@ -41,3 +51,6 @@ describe DockingStation do
   end
 
 end
+
+
+
