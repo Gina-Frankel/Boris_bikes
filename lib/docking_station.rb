@@ -16,7 +16,7 @@ class DockingStation
   end
 
   def dock_bikes(arg)
-    if @storage.size == 1
+    if @storage.size == 20
       fail "Dock at maximum capacity"
     else
       @storage.push(arg)

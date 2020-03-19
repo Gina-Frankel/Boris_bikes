@@ -26,9 +26,8 @@ describe DockingStation do
       expect(docking_station.look_at_bike).to include(daisy)
     end
 
-    it "raises an error if it exceeds maximum capacity" do
-      chris = Bike.new
-      docking_station.dock_bikes(chris)
+    it "raises an error if it exceeds maximum capacity (default 20)" do
+      20.times { docking_station.dock_bikes(Bike.new) }
       expect { docking_station.dock_bikes(daisy) }.to raise_error "Dock at maximum capacity"
     end
   end
