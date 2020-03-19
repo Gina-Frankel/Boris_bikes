@@ -11,17 +11,19 @@ class DockingStation
     if @storage.empty?
       fail "no bike available"
     else
-      return Bike.new
+      @storage.pop
     end
   end
 
   def dock_bikes(arg)
-    #created @daisy
-    @storage.push(arg)
+    if @storage.size == 1
+      fail "Dock at maximum capacity"
+    else
+      @storage.push(arg)
+    end
   end
 
   def look_at_bike
-    #@daisy stored
     @storage
   end
 

@@ -4,7 +4,7 @@ describe DockingStation do
   subject(:docking_station) { described_class.new }
   let(:daisy){Bike.new}
 
-  describe "release_bike" do
+  describe "#release_bike" do
     let(:releasing_station) { DockingStation.new }
 
     it "releases a bike" do
@@ -16,21 +16,29 @@ describe DockingStation do
     end
   end
 
-  it "responds to dock bike with 1 argument" do
-    expect(docking_station).to respond_to(:dock_bikes).with(1).argument
-  end
+  describe "#dock_bikes" do
+    it "responds with 1 argument" do
+      expect(docking_station).to respond_to(:dock_bikes).with(1).argument
+    end
+    
+    it "docks a bike" do
+      docking_station.dock_bikes(daisy)
+      expect(docking_station.look_at_bike).to include(daisy)
+    end
 
+    it "raises an error if it exceeds maximum capacity" do
+      chris = Bike.new
+      docking_station.dock_bikes(chris)
+      expect { docking_station.dock_bikes(daisy) }.to raise_error "Dock at maximum capacity"
+    end
+  end
+  
+  
   describe Bike do
     subject(:daisy){Bike.new}
     it "responds to working?" do
       expect(daisy).to respond_to :working?
     end
-  end
-
-
-  it "docks a bike" do
-    docking_station.dock_bikes(daisy)
-    expect(docking_station.look_at_bike).to include(daisy)
   end
 
 end
